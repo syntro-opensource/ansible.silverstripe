@@ -1,4 +1,7 @@
 ---
+- name: php
+  src: geerlingguy.php
+  version: 3.7.0
 - name: composer
   src: geerlingguy.composer
   version: 1.7.6
