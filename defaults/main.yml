@@ -1,0 +1,62 @@
+---
+  # Specify the base directory where the installation takes place
+  silverstripe_working_dir: /var/www
+  # Specify the name of the webroot directory
+  silverstripe_current_dir_name: 'html'
+  # Specify the origin repository and version (branch or tag name)
+  silverstripe_project_repository: ''
+  silverstripe_project_version: ''
+
+  # Specify the base url of this page. Needed for cli commands.
+  silverstripe_ss_base_url: http://localhost
+  # Specify the database server
+  silverstripe_ss_database_server: localhost
+  silverstripe_ss_database_name: ''
+  silverstripe_ss_database_username: ''
+  silverstripe_ss_database_password: ''
+  # specify the default administrator account name and password
+  silverstripe_ss_admin_username: 'admin'
+  silverstripe_ss_admin_password: 'admin'
+  # specify the mode of this installation. Choose between 'dev', 'test', 'live'.
+  # Using 'dev' will install composer dev-dependencies
+  silverstripe_ss_environment_type: 'dev'
+  # Uses the given file to check wether a flush should occur
+  silverstripe_ss_flush_on_deploy: '{{ ss_current_dir_path }}/index.php'
+  # Additional keys to be written to the .env file
+  silverstripe_add_ss_keys: {}
+
+  # The name of the resource directory as specified in the composer.json file.
+  # If you change the name of this directory, make sure to remove the old link
+  # manually to avoid broken paths
+  silverstripe_resource_dir_name: _resources
+
+  # Additional shared directories which should persist between releases
+  # You can control how the direcory or file is exposed by specifying
+  # the options in the asset example below. These values default to false.
+  silverstripe_add_shared_dirs:
+      # thew name of the directory/file
+    - name: assets
+      # wether to expose the file to the public dir (if present). If false,
+      # the link is placed in the release dir
+      link_in_public: true
+      # wethter to expose this directory/file to the webroot
+      link_in_webroot: true
+  silverstripe_add_shared_files: []
+
+  # Scripts to be run before pushing the new version to the webroot.
+  # Use this array to run the dev/build command from the cli or any backup
+  # scripts you might need.
+  silverstripe_provisioning_cmds:
+    - '{{ ss_current_release_dir_path }}/vendor/bin/sake /dev/build "flush=1"'
+
+  # Number of releases to retain. If you run this role for a commit which is
+  # currently retained, this role will not attempt to reinstall composer
+  # dependencies saving time in case of a rollback.
+  # MUST BE > 0, otherwise no release is deployed
+  silverstripe_retained_releases: 2
+
+
+  # The path to the composer binary.
+  silverstripe_composer_command: '/usr/local/bin/composer'
+  # add --ignore-platform-reqs flag to composer command
+  silverstripe_composer_ignore_platform_reqs: false

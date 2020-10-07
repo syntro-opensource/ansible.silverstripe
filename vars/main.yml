@@ -1,0 +1,20 @@
+---
+  force_handler: true
+  ss_self_role_url: https://git.syntro.ch/services/silverstripe/ansible.silverstripe
+  ss_current_dir_path: '{{ silverstripe_working_dir }}/{{ silverstripe_current_dir_name }}'
+  ss_releases_dir_path: '{{ silverstripe_working_dir }}/releases'
+  ss_log_dir_path: '{{ silverstripe_working_dir }}/logs'
+  ss_shared_dir_path: '{{ silverstripe_working_dir }}/shared'
+  ss_release_save_file_path: '{{ silverstripe_working_dir }}/.retention.yml'
+
+  ss_current_release_name: 'release-{{ silverstripe_project_version }}'
+  ss_current_release_dir_path: '{{ ss_releases_dir_path }}/{{ ss_current_release_name }}'
+  ss_current_public_dir_path: '{{ ss_current_release_dir_path }}'
+
+
+  # Shared files are set via an _add_ variable. this is done to allow the role
+  # to define fixed directories or files to be always shared.
+  silverstripe_default_shared_dirs: []
+  silverstripe_shared_dirs: '{{ silverstripe_default_shared_dirs + silverstripe_add_shared_dirs }}'
+  silverstripe_default_shared_files: []
+  silverstripe_shared_files: '{{ silverstripe_default_shared_files + silverstripe_add_shared_files }}'

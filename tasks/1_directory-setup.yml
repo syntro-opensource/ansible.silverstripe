@@ -1,0 +1,16 @@
+---
+# Setup directory structure.
+# We do not change anything vital here, but for any action taken during the run
+# we have to assert that the directory structure is intact in order to avoid
+# unnecessary fails.
+
+  - name: 'directory setup : ensure basic structure exists'
+    file:
+      path: '{{ item }}'
+      state: directory
+      mode: 0755
+    with_items:
+      - '{{ ss_current_dir_path }}'
+      - '{{ ss_releases_dir_path }}'
+      - '{{ ss_log_dir_path }}'
+      - '{{ ss_shared_dir_path }}'

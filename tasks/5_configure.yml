@@ -1,0 +1,37 @@
+---
+# Configure the silverstripe installation. This will:
+#
+# - render a .env file in the ss_current_release_dir_path
+# - render an index.php file in the ss_current_public_dir_path
+# - render an .htaccess file in the ss_current_public_dir_path
+# - render an .htaccess file in the ss_current_release_dir_path in case there
+#   is a public/ dir
+#
+# We do this even if those files are not accessible so an accidental exposure
+# will not comporomise the release
+
+  - name: 'configure : template out index.php'
+    template:
+      src: index.php.j2
+      dest: '{{ ss_current_public_dir_path }}/index.php'
+      mode: 0644
+
+  - name: 'configure : template out public .htaccess'
+    template:
+      src: htaccess.public.j2
+      dest: '{{ ss_current_public_dir_path }}/.htaccess'
+      mode: 0644
+
+  - name: 'configure : template out .htaccess in release dir'
+    template:
+      src: htaccess.j2
+      dest: '{{ ss_current_release_dir_path }}/.htaccess'
+      mode: 0644
+    when:
+      - ss_current_public_dir_path != ss_current_release_dir_path
+
+  - name: 'configure : template out .env'
+    template:
+      src: env.j2
+      dest: '{{ ss_current_release_dir_path }}/.env'
+      mode: 0644

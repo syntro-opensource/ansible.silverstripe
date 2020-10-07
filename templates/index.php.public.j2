@@ -1,0 +1,26 @@
+<?php
+// managed by ansible
+// last run: {{ template_run_date }}
+// to: {{ template_host }}
+
+use SilverStripe\Control\HTTPApplication;
+use SilverStripe\Control\HTTPRequestBuilder;
+use SilverStripe\Core\CoreKernel;
+
+// Find autoload.php
+if (file_exists(__DIR__ . '/../releases/{{ ss_current_release_name }}/vendor/autoload.php')) {
+    require __DIR__ . '/../releases/{{ ss_current_release_name }}/vendor/autoload.php';
+} else {
+    header('HTTP/1.1 500 Internal Server Error');
+    echo "autoload.php not found";
+    exit(1);
+}
+
+// Build request and detect flush
+$request = HTTPRequestBuilder::createFromEnvironment();
+
+// Default application
+$kernel = new CoreKernel(BASE_PATH);
+$app = new HTTPApplication($kernel);
+$response = $app->handle($request);
+$response->output();

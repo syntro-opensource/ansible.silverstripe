@@ -1,0 +1,7 @@
+---
+- name: composer
+  src: geerlingguy.composer
+  version: 1.7.6
+- name: git
+  src: geerlingguy.git
+  version: 2.0.5

@@ -1,0 +1,35 @@
+---
+# If this file is imported, we have to update the list of retained releases and
+# remove the oldest one.
+
+  - name: 'release : update release : prepend current release'
+    set_fact:
+      ss_retention_list_tmp:
+        - sha: '{{ ss_current_release_name }}'
+          target: '{{ silverstripe_project_version }}'
+          from: '{{ "%Y-%m-%d %H:%M:%S" | strftime(ansible_date_time.epoch) }}'
+
+  - name: 'release : update release : append old releases'
+    set_fact:
+      ss_retention_list_tmp: '{{ ss_retention_list_tmp + [item] }}'
+    loop: '{{ ss_retention_list }}'
+    loop_control:
+      index_var: release_no
+    when:
+      - release_no < (silverstripe_retained_releases - 1)
+
+  - name: 'release : update release : dump out new list'
+    copy:
+      dest: '{{ ss_release_save_file_path }}'
+      content: '{{ {"ss_retention_list":ss_retention_list_tmp} | to_nice_yaml(indent=2, width=1337) }}'
+      mode: 0644
+
+  - name: 'release : update release : remove old releases'
+    file:
+      path: '{{ ss_releases_dir_path }}/{{ item.sha }}'
+      state: absent
+    loop: '{{ ss_retention_list }}'
+    loop_control:
+      index_var: release_no
+    when:
+      - release_no >= (silverstripe_retained_releases - 1)

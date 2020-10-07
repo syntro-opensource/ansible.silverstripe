@@ -1,0 +1,10 @@
+---
+# Lock the current working dir so no concurrent deployment can happen
+  - name: 'lock : lockfile'
+    file:
+      path: '{{ silverstripe_working_dir }}/.lock'
+      state: touch
+      mode: 0644
+    notify: unlock
+    tags:
+      - lock

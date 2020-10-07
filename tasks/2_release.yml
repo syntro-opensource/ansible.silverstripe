@@ -1,0 +1,112 @@
+---
+# Here, we prepare the directory where the newest deployment resides and
+# then deploy it
+
+  - name: 'release : create temp dir for git module'
+    file:
+      path: "{{ silverstripe_working_dir }}/.tmp"
+      state: directory
+      mode: 0755
+
+  - name: 'release : retrieve newest commit for silverstripe_project_version'
+    git:
+      repo: '{{ silverstripe_project_repository }}'
+      clone: no
+      version: '{{ silverstripe_project_version }}'
+      key_file: '{{ ss_deploy_key | default(omit) }}'
+      accept_hostkey: '{{ ss_accept_host | default("yes") }}'
+    register: ss_newest_commit
+    environment:
+        TMPDIR: "{{ silverstripe_working_dir }}/.tmp"
+
+  # TODO: We should fail if the release is not found here
+  - name: 'release : set name'
+    set_fact:
+      ss_current_release_name: '{{ ss_newest_commit.after }}'
+    when:
+      - ss_newest_commit.after is defined
+
+  # We import all existing releases using a savefile on the remote host.
+  # this way, we can keep track of the order in which the releases have
+  # been deployed
+  - name: 'release : read retained releases'
+    include_tasks: release/0_read.yml
+
+  # We check if the required commit is already present on the server
+  # and clone it if necessary
+  - name: 'release : check if current release exists'
+    stat:
+      path: '{{ ss_current_release_dir_path }}'
+    register: ss_current_release_dir_path_stat
+
+  - name: 'release : release directory'
+    file:
+      path: '{{ ss_current_release_dir_path }}'
+      state: directory
+      mode: 0755
+    when:
+      - ss_current_release_dir_path_stat.stat.isdir is not defined
+
+  - name: 'release : checkout version'
+    git:
+      repo: '{{ silverstripe_project_repository }}'
+      dest: '{{ ss_current_release_dir_path }}'
+      version: '{{ silverstripe_project_version }}'
+      key_file: '{{ ss_deploy_key | default(omit) }}'
+      accept_hostkey: '{{ ss_accept_host | default("yes") }}'
+    when:
+      - ss_current_release_dir_path_stat.stat.isdir is not defined
+    environment:
+        TMPDIR: "{{ silverstripe_working_dir }}/.tmp"
+
+  - name: 'release : remove temp dir for git module'
+    file:
+      path: "{{ silverstripe_working_dir }}/.tmp"
+      state: absent
+
+  # If the commit was already present, we update the savefile accordingly
+  - name: 'release : restore release'
+    include_tasks: release/restore.yml
+    when:
+      - ss_current_release_dir_path_stat.stat.isdir is defined
+      - ss_current_release_dir_path_stat.stat.isdir
+      - ss_retention_list|length==0 or ss_retention_list[0].sha != ss_current_release_name
+  # If the commit is new, we update the savefile accordingly
+  - name: 'release : update release'
+    include_tasks: release/update.yml
+    when:
+      - ss_current_release_dir_path_stat.stat.isdir is not defined
+      - ss_retention_list|length==0 or ss_retention_list[0].sha != ss_current_release_name
+
+
+
+  # We check if the release we are tracking contains a 'public/' directory.
+  # we have to adapt to this, as Silverstripe behaves differently if this
+  # directory is present
+  - name: 'release : find public dir'
+    stat:
+      path: '{{ ss_current_release_dir_path }}/public'
+    register: ss_current_dir_path_stat
+
+  - name: 'release : update path if public dir is present'
+    set_fact:
+      ss_current_public_dir_path: '{{ ss_current_release_dir_path }}/public'
+    when:
+      - ss_current_dir_path_stat.stat.isdir is defined
+      - ss_current_dir_path_stat.stat.isdir
+
+  - name: 'release : set relative logfile path'
+    set_fact:
+      ss_current_log_file: '../../../logs/ss_log.log'
+    when:
+      - ss_current_dir_path_stat.stat.isdir is defined
+      - ss_current_dir_path_stat.stat.isdir
+
+  - name: 'release : apply modus to release dir'
+    file:
+      path: '{{ item }}'
+      mode: 0755
+      state: directory
+    with_items:
+      - '{{ ss_current_release_dir_path }}'
+      - '{{ ss_current_public_dir_path }}'

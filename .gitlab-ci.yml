@@ -1,0 +1,31 @@
+---
+image: quay.io/ansible/molecule:3.0.4
+
+variables:
+  DOCKER_TLS_CERTDIR: ""
+  DOCKER_HOST: tcp://docker:2375/
+  DOCKER_DRIVER: overlay
+
+
+services:
+  - docker:dind
+
+
+# molecule-ubuntu:
+#   tags:
+#     - dind
+#   stage: test
+#   variables:
+#     MOLECULE_DISTRO: ubuntu1804
+#   script:
+#     - ansible --version
+#     - molecule test
+molecule-debian:
+  tags:
+    - dind
+  stage: test
+  variables:
+    MOLECULE_DISTRO: debian10
+  script:
+    - ansible --version
+    - molecule test

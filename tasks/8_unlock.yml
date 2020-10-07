@@ -1,0 +1,8 @@
+---
+# Unock the current working dir so other deployments can happen
+  - name: unlock > lockfile
+    file:
+      path: '{{ silverstripe_working_dir }}/.lock'
+      state: absent
+    tags:
+      - unlock

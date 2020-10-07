@@ -1,0 +1,9 @@
+---
+# We execute provisioning commands if they have been defined by the user.
+
+  - name: commands > run scripts
+    command: 'sh {{ item }}'
+    with_items:
+      - '{{ silverstripe_provisioning_cmds }}'
+    when:
+      - (silverstripe_provisioning_cmds|length >0)

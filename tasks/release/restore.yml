@@ -1,0 +1,26 @@
+---
+# If this file is imported, we restore a release and do not delete any retained
+# releases. We have to rearrange the list stored in .retention.yml.
+
+  - name: 'release : restore release : prepend current release'
+    set_fact:
+      ss_retention_list_tmp:
+        - sha: '{{ ss_current_release_name }}'
+          target: '{{ silverstripe_project_version }}'
+          from: '{{ "%Y-%m-%d %H:%M:%S" | strftime(ansible_date_time.epoch) }}'
+
+  - name: 'release : restore release : append old releases'
+    set_fact:
+      ss_retention_list_tmp: '{{ ss_retention_list_tmp + [item] }}'
+    loop: '{{ ss_retention_list }}'
+    loop_control:
+      index_var: release_no
+    when:
+      - release_no < (silverstripe_retained_releases - 1)
+      - item.sha != ss_current_release_name
+
+  - name: 'release : restore release : dump out new list'
+    copy:
+      dest: '{{ ss_release_save_file_path }}'
+      content: '{{ {"ss_retention_list":ss_retention_list_tmp} | to_nice_yaml(indent=2, width=1337) }}'
+      mode: 0644

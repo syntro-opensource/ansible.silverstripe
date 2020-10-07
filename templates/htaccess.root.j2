@@ -1,0 +1,7 @@
+# managed by ansible
+# last run: {{ template_run_date }}
+# to: {{ template_host }}
+
+RewriteEngine On
+RewriteRule ^(.*)$ current/$1 [NC,L]
+

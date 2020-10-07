@@ -1,0 +1,5 @@
+---
+  - name: unlock
+    file:
+      path: '{{ silverstripe_working_dir }}/.lock'
+      state: absent

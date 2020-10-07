@@ -1,0 +1,19 @@
+---
+- name: Converge
+  hosts: all
+  vars:
+    silverstripe_working_dir: /var/www
+    silverstripe_project_repository: https://github.com/silverstripe/recipe-core.git
+    silverstripe_project_version: master
+    silverstripe_ss_database_name: silverstripe
+    silverstripe_ss_database_username: root
+    silverstripe_ss_database_password: root
+    silverstripe_provisioning_cmds: []
+    silverstripe_composer_ignore_platform_reqs: true
+  pre_tasks:
+    - name: make root directory
+      file:
+        path: /var/www
+        state: directory
+  roles:
+    - role: ansible.silverstripe

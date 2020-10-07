@@ -1,0 +1,66 @@
+---
+# The last step for the deploy, we have to create an index file and link assets
+# and resources to the actual webroot
+#
+# WorkingDir/
+# ├── current/
+# │   ├── .htaccess
+# │   ├── index.php
+# │   ├── assets/ -> ../shared/assets/
+# │   ├── _resources/ -> ../releases/version-current/_resources/
+# │   └── add_public_dir/ -> ../shared/add_public_dir/
+# └── releases/
+#     └── version-current/
+#         ├── .git
+#         └── ...
+#
+# We want to make an atomic symlink by using the 'mv -f' command. In later
+# releases of this role, we might want to test for the availability (TODO)
+
+  - name: 'symlink : create tempdir'
+    file:
+      path: '{{ ss_releases_dir_path }}/.tmp'
+      state: directory
+
+  - name: 'symlink : create links'
+    file:
+      path: '{{ ss_releases_dir_path }}/.tmp/{{ item.name }}'
+      src: '{{ item.src }}'
+      mode: 0755
+      state: link
+    with_items:
+      - name: '{{ silverstripe_resource_dir_name }}'
+        src: '{{ ss_current_public_dir_path }}/{{ silverstripe_resource_dir_name }}'
+
+  - name: 'symlink : template out public index.php'
+    template:
+      src: index.php.public.j2
+      dest: '{{ ss_releases_dir_path }}/.tmp/index.php'
+      mode: 0644
+
+  - name: 'symlink : template out public .htaccess'
+    template:
+      src: htaccess.public.j2
+      dest: '{{ ss_releases_dir_path }}/.tmp/.htaccess'
+      mode: 0644
+
+  - name: 'symlink : move links'
+    shell: |
+      mv \
+      -f {{ ss_releases_dir_path }}/.tmp/.htaccess \
+      -f {{ ss_releases_dir_path }}/.tmp/* \
+      .
+    args:
+      removes: '{{ ss_releases_dir_path }}/.tmp/index.php'
+      chdir: '{{ ss_current_dir_path }}'
+
+  - name: 'symlink : remove tempdir'
+    file:
+      path: '{{ ss_releases_dir_path }}/.tmp'
+      state: absent
+
+  # - name: 'symlink : update root htaccess'
+  #   template:
+  #     src: htaccess.root.j2
+  #     dest: '{{ silverstripe_working_dir }}/.htaccess'
+  #     mode: 0644

@@ -1,0 +1,33 @@
+---
+# read or create the file containing the retained releases
+
+  - name: 'release : read retained releases : find savefile'
+    stat:
+      path: '{{ ss_release_save_file_path }}'
+    register: ss_release_save_file_stat
+
+  - name: 'release : read retained releases : default to empty array'
+    set_fact:
+      ss_retention_file: {'ss_retention_list':[]}
+    when:
+      - ss_release_save_file_stat.stat.checksum is not defined
+
+  - name: 'release : read retained releases : read file'
+    slurp:
+      src: '{{ ss_release_save_file_path }}'
+    register: ss_release_save_file_slurp
+    when:
+      - ss_release_save_file_stat.stat.checksum is defined
+
+  - name: 'release : read retained releases : import retained releases'
+    set_fact:
+      ss_retention_file: "{{ ss_release_save_file_slurp['content'] | b64decode | from_yaml }}"
+    # include_vars:
+    #   file: '{{ ss_release_save_file_path }}'
+    #   name: ss_retention_file
+    when:
+      - ss_release_save_file_stat.stat.checksum is defined
+
+  - name: 'release : read retained releases : beautify'
+    set_fact:
+      ss_retention_list: '{{ ss_retention_file.ss_retention_list }}'

@@ -1,0 +1,102 @@
+---
+  # prep steps, ensuring all necessary info is present.
+  # This is done in order to ensure a minimal stability between releases,
+  # i.e. to to not run without database credentials
+
+  - name: 'check for variables'
+    assert:
+      that:
+        - silverstripe_working_dir is defined and (silverstripe_working_dir|length>0)
+        - silverstripe_ss_database_name is defined and (silverstripe_ss_database_name|length>0)
+        - silverstripe_ss_database_username is defined and (silverstripe_ss_database_username|length>0)
+        - silverstripe_ss_database_password is defined and (silverstripe_ss_database_password|length>0)
+        - silverstripe_project_repository is defined and (silverstripe_project_repository|length>0)
+        - silverstripe_project_version is defined and (silverstripe_project_version|length>0)
+        - silverstripe_retained_releases is defined and silverstripe_retained_releases > 0
+      fail_msg: 'Please make sure to define all required variables. see {{ ss_self_role_url }} for info'
+    tags:
+      - always
+      - prep
+
+  - name: 'make sure a secure password is used on live site'
+    assert:
+      that:
+        - silverstripe_ss_admin_username != 'admin' and (silverstripe_ss_admin_username|length>0)
+        - silverstripe_ss_admin_password != 'admin' and (silverstripe_ss_admin_password|length>0)
+      fail_msg: 'You are using the default settings for the admin admin account for a live page. You should use something more secure!'
+    when: silverstripe_ss_environment_type == 'live'
+    tags:
+      - always
+      - prep
+
+  - name: 'find working dir'
+    stat:
+      path: '{{ silverstripe_working_dir }}'
+    register: ss_working_dir_stat
+    tags:
+      - always
+      - prep
+
+  - name: 'make sure working dir exists'
+    assert:
+      that:
+        - ss_working_dir_stat.stat.isdir is defined
+        - ss_working_dir_stat.stat.isdir
+      fail_msg: "The working dir is not present. Please create it before deploying."
+    tags:
+      - always
+      - prep
+
+  - name: 'find lockfile'
+    stat:
+      path: '{{ silverstripe_working_dir }}/.lock'
+    register: ss_lockfile_stat
+    tags:
+      - prep
+
+  - name: 'make sure lockfile is absent'
+    assert:
+      that:
+        - ss_lockfile_stat.stat.checksum is not defined
+      fail_msg: "there seems to be another deployment running. Please make sure that no other deployment is running."
+    tags:
+      - prep
+
+  # deployment steps
+
+  - name: 'lock'
+    include_tasks: '0_lock.yml'
+
+  - name: 'directory setup'
+    include_tasks: '1_directory-setup.yml'
+
+  - name: 'release'
+    include_tasks: '2_release.yml'
+
+  - name: 'shared files'
+    include_tasks: '3_shared-files.yml'
+
+  - name: 'vendors'
+    include_tasks: '4_vendors.yml'
+    tags:
+      - vendors
+
+  - name: 'configure'
+    include_tasks: '5_configure.yml'
+    when:
+      - ss_retention_list|length==0 or ss_retention_list[0].sha != ss_current_release_name
+
+  - name: 'commands'
+    include_tasks: '6_commands.yml'
+    when:
+      - ss_retention_list|length==0 or ss_retention_list[0].sha != ss_current_release_name
+
+  - name: 'symlink'
+    include_tasks: '7_symlink.yml'
+    when:
+      - ss_retention_list|length==0 or ss_retention_list[0].sha != ss_current_release_name
+
+  - name: 'unlock'
+    include_tasks: '8_unlock.yml'
+    tags:
+      - unlock

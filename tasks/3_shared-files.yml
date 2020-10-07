@@ -1,0 +1,113 @@
+---
+  # we link the shared files and directories to the release directory
+
+  - name: 'shared files : ensure shared dirs exist'
+    file:
+      path: '{{ ss_shared_dir_path }}/{{ item.name }}'
+      state: directory
+      mode: 0755
+    loop: '{{ silverstripe_shared_dirs }}'
+    loop_control:
+      index_var: name
+
+  - name: 'shared files : ensure shared files exist'
+    file:
+      path: '{{ ss_shared_dir_path }}/{{ item.name }}'
+      state: touch
+      mode: 0755
+    loop: '{{ silverstripe_shared_files }}'
+    loop_control:
+      index_var: name
+
+  - name: 'shared files : link shared dirs in public dir'
+    file:
+      path: '{{ ss_current_public_dir_path }}/{{ item.name }}'
+      src: '{{ ss_shared_dir_path }}/{{ item.name }}'
+      state: link
+      mode: 0755
+    loop: '{{ silverstripe_shared_dirs }}'
+    loop_control:
+      index_var: name
+    when:
+      - link_in_public | default(true)
+
+  - name: 'shared files : link shared dirs in release dir'
+    file:
+      path: '{{ ss_current_release_dir_path }}/{{ item.name }}'
+      src: '{{ ss_shared_dir_path }}/{{ item.name }}'
+      state: link
+      mode: 0755
+    loop: '{{ silverstripe_shared_dirs }}'
+    loop_control:
+      index_var: name
+    when:
+      - not link_in_public | default(true)
+
+  - name: 'shared files : link shared dirs in webroot dir'
+    file:
+      path: '{{ ss_current_dir_path }}/{{ item.name }}'
+      src: '{{ ss_shared_dir_path }}/{{ item.name }}'
+      state: link
+      mode: 0755
+    loop: '{{ silverstripe_shared_dirs }}'
+    loop_control:
+      index_var: name
+    when:
+      - link_in_webroot | default(true)
+
+
+
+  - name: 'shared files : link shared files in public dir'
+    file:
+      path: '{{ ss_current_public_dir_path }}/{{ item.name }}'
+      src: '{{ ss_shared_dir_path }}/{{ item.name }}'
+      state: link
+      mode: 0755
+    loop: '{{ silverstripe_shared_files }}'
+    loop_control:
+      index_var: name
+    when:
+      - link_in_public | default(true)
+
+  - name: 'shared files : link shared files in release dir'
+    file:
+      path: '{{ ss_current_release_dir_path }}/{{ item.name }}'
+      src: '{{ ss_shared_dir_path }}/{{ item.name }}'
+      state: link
+      mode: 0755
+    loop: '{{ silverstripe_shared_files }}'
+    loop_control:
+      index_var: name
+    when:
+      - not link_in_public | default(true)
+
+  - name: 'shared files : link shared files in webroot dir'
+    file:
+      path: '{{ ss_current_dir_path }}/{{ item.name }}'
+      src: '{{ ss_shared_dir_path }}/{{ item.name }}'
+      state: link
+      mode: 0755
+    loop: '{{ silverstripe_shared_files }}'
+    loop_control:
+      index_var: name
+    when:
+      - link_in_webroot | default(true)
+
+
+  # - name: 'shared files : link shared dirs in public'
+  #   file:
+  #     path: '{{ ss_current_public_dir_path }}/{{ item }}'
+  #     src: '{{ ss_shared_dir_path }}/{{ item }}'
+  #     state: link
+  #     mode: 0755
+  #   with_items:
+  #     - '{{ silverstripe_shared_dirs }}'
+  #
+  # - name: 'shared files : link shared files in release'
+  #   file:
+  #     path: '{{ ss_current_public_dir_path }}/{{ item }}'
+  #     src: '{{ ss_shared_dir_path }}/{{ item }}'
+  #     state: link
+  #     mode: 0755
+  #   with_items:
+  #     - '{{ silverstripe_shared_files }}'
