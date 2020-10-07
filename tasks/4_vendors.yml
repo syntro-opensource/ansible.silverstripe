@@ -6,18 +6,17 @@
 # preinstalled tools and composer may be outdated or not even installed.
 
   - name: "vendors : composer"
-    command:
-      argv:
-        - "{{ silverstripe_composer_command }}"
-        - install
-        - "{{ '--no-dev' if silverstripe_ss_environment_type != 'dev' }}"
-        - "{{ '--ignore-platform-reqs' if silverstripe_composer_ignore_platform_reqs }}"
-        - --no-ansi
-        - --no-progress
-        - --no-interaction
-        - --optimize-autoloader
+    command: |
+      {{ silverstripe_composer_command }} \
+      install \
+      {{ '--no-dev' if silverstripe_ss_environment_type != 'dev' }} \
+      {{ '--ignore-platform-reqs' if silverstripe_composer_ignore_platform_reqs }} \
+      --no-ansi \
+      --no-progress \
+      --no-interaction \
+      --optimize-autoloader
     args:
       chdir: '{{ ss_current_release_dir_path }}'
-      creates: '{{ ss_current_release_dir_path }}/vendor/autoload.php'
+      # creates: '{{ ss_current_release_dir_path }}/vendor/autoload.php'
     tags:
       - vendors
