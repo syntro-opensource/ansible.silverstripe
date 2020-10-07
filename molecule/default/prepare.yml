@@ -2,7 +2,25 @@
 - name: Prepare
   hosts: all
   become: yes
-  pre_tasks:
+  vars:
+    php_packages:
+      - php
+      - php-cli
+      - php-pdo
+      - php-gd
+      # - php-pdo_mysql
+      - php-mysqli
+      - php-opcache
+      - php-mbstring
+      - php-tidy
+      - php-intl
+      - php-zip
+      - php-xml
+      - php-dom
+      - php-curl
+    php_default_version_debian: "7.2"
+    php_opcache_enable_cli: "1"
   roles:
+    - role: php
     - role: composer
     - role: git

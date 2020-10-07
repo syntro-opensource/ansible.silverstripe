@@ -1,0 +1,42 @@
+name: Update Changelog
+
+on:
+  push:
+    branches:
+      - release/*
+      - hotfix/*
+jobs:
+  update-changelog:
+    name: 📝 Update changelog for release
+    if: ${{ ( contains(github.ref, 'release') || contains(github.ref, 'release') && github.event_name == 'push' ) }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: 🧬 Extract release info
+        shell: bash
+        run: |
+          echo "::set-output name=branch::$(echo ${GITHUB_REF#refs/heads/})"  &&\
+          echo "::set-output name=version::$(echo $(echo $GITHUB_REF | grep -o -E '[0-9]+\.[0-9]+\.[0-9]+'))"
+        id: extract_branch
+      - name: 📥 Check-out
+        uses: actions/checkout@v2
+        with:
+          ref: ${{ steps.extract_branch.outputs.branch }}
+          fetch-depth: 0
+      - name: 🧩 Update Changelog
+        env:
+          RELEASE_TAG: ${{ steps.extract_branch.outputs.version }}
+        run: |
+          curl -o git-chglog -L https://github.com/git-chglog/git-chglog/releases/download/0.9.1/git-chglog_linux_amd64
+          chmod u+x git-chglog
+          ./git-chglog -o CHANGELOG.md --next-tag $RELEASE_TAG
+          rm git-chglog
+      - name: 📨 Create pull request for changelog update
+        uses: peter-evans/create-pull-request@v3
+        with:
+          delete-branch: true
+          title: Update Changelog for release ${{ steps.extract_branch.outputs.version }}
+          body: |
+            Update changelog to reflect release changes.
+            Make sure to include the changed items under ${{ steps.extract_branch.outputs.version }} in the release commit.
+          branch: update-changelog
+          assignees: ${{ github.actor }}
