@@ -16,4 +16,4 @@
         path: /var/www
         state: directory
   roles:
-    - role: silverstripe
+    - role: ansible.silverstripe
