@@ -12,3 +12,5 @@ jobs:
           path: "${{ github.repository }}"
       - name: molecule
         uses: robertdebock/molecule-action@2.6.3
+        with:
+          image: ubuntu
