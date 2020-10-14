@@ -2,10 +2,13 @@
 name: Galaxy import
 
 on:
+  push:
+    branches:
+      - develop
+      - master
   release:
     types:
       - published
-  
 
 jobs:
   import:
