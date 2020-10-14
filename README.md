@@ -42,7 +42,7 @@ to be taken by the user of this role.
 
 ## Installation
 ```
-ansible-galaxy install syntro.silverstripe
+ansible-galaxy install syntro_gmbh.silverstripe
 ```
 
 ## Requirements
