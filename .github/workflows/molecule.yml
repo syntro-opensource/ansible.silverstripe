@@ -1,9 +1,10 @@
 ---
+name: Molecule test
 on:
   - push
 
 jobs:
-  build:
+  molecule:
     runs-on: ubuntu-latest
     steps:
       - name: checkout
