@@ -1,6 +1,8 @@
 # Ansible Role: silverstripe
 
-
+[![Ansible Role](https://img.shields.io/ansible/role/51272?color=darkred&logo=ansible)](https://galaxy.ansible.com/syntro_gmbh/silverstripe)
+[![Ansible Quality Score](https://img.shields.io/ansible/quality/51272?logo=ansible)](https://galaxy.ansible.com/syntro_gmbh/silverstripe)
+[![Ansible Role](https://img.shields.io/ansible/role/d/51272?color=success&logo=ansible)](https://galaxy.ansible.com/syntro_gmbh/silverstripe)
 
 ## Description
 
