@@ -1,6 +1,7 @@
 # Ansible Role: silverstripe
 
 [![Ansible Role](https://img.shields.io/ansible/role/51272?color=darkred&logo=ansible)](https://galaxy.ansible.com/syntro_gmbh/silverstripe)
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/syntro-opensource/ansible.silverstripe)
 ![Molecule test](https://github.com/syntro-opensource/ansible.silverstripe/workflows/Molecule%20test/badge.svg)
 [![Ansible Quality Score](https://img.shields.io/ansible/quality/51272?logo=ansible)](https://galaxy.ansible.com/syntro_gmbh/silverstripe)
 [![Ansible Role](https://img.shields.io/ansible/role/d/51272?color=success&logo=ansible)](https://galaxy.ansible.com/syntro_gmbh/silverstripe)
