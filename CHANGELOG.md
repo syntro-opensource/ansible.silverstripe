@@ -2,6 +2,12 @@
 ## [Unreleased]
 
 
+<a name="1.0.2"></a>
+## [1.0.2] - 2020-10-23
+### 🔧 Changed
+- step to ensure presence of vars now enforces string to allow vaulted vars
+
+
 <a name="1.0.1"></a>
 ## [1.0.1] - 2020-10-14
 ### 🍰 Added
@@ -38,5 +44,6 @@
 - Merge pull request [#4](https://github.com/syntro-opensource/ansible.silverstripe/issues/4) from syntro-opensource/release/1.0.0
 
 
-[Unreleased]: https://github.com/syntro-opensource/ansible.silverstripe/compare/1.0.1...HEAD
+[Unreleased]: https://github.com/syntro-opensource/ansible.silverstripe/compare/1.0.2...HEAD
+[1.0.2]: https://github.com/syntro-opensource/ansible.silverstripe/compare/1.0.1...1.0.2
 [1.0.1]: https://github.com/syntro-opensource/ansible.silverstripe/compare/1.0.0...1.0.1
