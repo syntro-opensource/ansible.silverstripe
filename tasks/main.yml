@@ -6,12 +6,12 @@
   - name: 'check for variables'
     assert:
       that:
-        - silverstripe_working_dir is defined and (silverstripe_working_dir|length>0)
-        - silverstripe_ss_database_name is defined and (silverstripe_ss_database_name|length>0)
-        - silverstripe_ss_database_username is defined and (silverstripe_ss_database_username|length>0)
-        - silverstripe_ss_database_password is defined and (silverstripe_ss_database_password|length>0)
-        - silverstripe_project_repository is defined and (silverstripe_project_repository|length>0)
-        - silverstripe_project_version is defined and (silverstripe_project_version|length>0)
+        - silverstripe_working_dir is defined and (silverstripe_working_dir | string | length>0)
+        - silverstripe_ss_database_name is defined and (silverstripe_ss_database_name | string | length>0)
+        - silverstripe_ss_database_username is defined and (silverstripe_ss_database_username | string | length>0)
+        - silverstripe_ss_database_password is defined and (silverstripe_ss_database_password | string | length>0)
+        - silverstripe_project_repository is defined and (silverstripe_project_repository | string | length>0)
+        - silverstripe_project_version is defined and (silverstripe_project_version | string | length>0)
         - silverstripe_retained_releases is defined and silverstripe_retained_releases > 0
       fail_msg: 'Please make sure to define all required variables. see {{ ss_self_role_url }} for info'
     tags:
@@ -21,8 +21,8 @@
   - name: 'make sure a secure password is used on live site'
     assert:
       that:
-        - silverstripe_ss_admin_username != 'admin' and (silverstripe_ss_admin_username|length>0)
-        - silverstripe_ss_admin_password != 'admin' and (silverstripe_ss_admin_password|length>0)
+        - silverstripe_ss_admin_username != 'admin' and (silverstripe_ss_admin_username | string | length>0)
+        - silverstripe_ss_admin_password != 'admin' and (silverstripe_ss_admin_password | string | length>0)
       fail_msg: 'You are using the default settings for the admin admin account for a live page. You should use something more secure!'
     when: silverstripe_ss_environment_type == 'live'
     tags:
