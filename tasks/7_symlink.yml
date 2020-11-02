@@ -46,9 +46,9 @@
 
   - name: 'symlink : move links'
     shell: |
-      mv \
-      -f {{ ss_releases_dir_path }}/.tmp/.htaccess \
-      -f {{ ss_releases_dir_path }}/.tmp/* \
+      mv -f \
+      {{ ss_releases_dir_path }}/.tmp/.htaccess \
+      {{ ss_releases_dir_path }}/.tmp/* \
       .
     args:
       removes: '{{ ss_releases_dir_path }}/.tmp/index.php'
