@@ -2,6 +2,18 @@
 ## [Unreleased]
 
 
+<a name="1.0.4"></a>
+## [1.0.4] - 2021-04-07
+### 🐞 Fixed
+- dependabot uses correct ecosystem for actions
+
+### 🔧 Changed
+- use items() for extra variables loop
+
+### 🧬 Dependencies
+- robertdebock/molecule-action from 2.6.3 to 2.6.4 ([#12](https://github.com/syntro-opensource/ansible.silverstripe/issues/12))
+
+
 <a name="1.0.3"></a>
 ## [1.0.3] - 2020-11-02
 ### 🐞 Fixed
@@ -50,7 +62,8 @@
 - Merge pull request [#4](https://github.com/syntro-opensource/ansible.silverstripe/issues/4) from syntro-opensource/release/1.0.0
 
 
-[Unreleased]: https://github.com/syntro-opensource/ansible.silverstripe/compare/1.0.3...HEAD
+[Unreleased]: https://github.com/syntro-opensource/ansible.silverstripe/compare/1.0.4...HEAD
+[1.0.4]: https://github.com/syntro-opensource/ansible.silverstripe/compare/1.0.3...1.0.4
 [1.0.3]: https://github.com/syntro-opensource/ansible.silverstripe/compare/1.0.2...1.0.3
 [1.0.2]: https://github.com/syntro-opensource/ansible.silverstripe/compare/1.0.1...1.0.2
 [1.0.1]: https://github.com/syntro-opensource/ansible.silverstripe/compare/1.0.0...1.0.1
