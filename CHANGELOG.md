@@ -2,6 +2,16 @@
 ## [Unreleased]
 
 
+<a name="1.1.0"></a>
+## [1.1.0] - 2021-05-18
+### 🍰 Added
+- allow a custom htaccess template
+
+### 🧬 Dependencies
+- robertdebock/molecule-action from 2.6.8 to 2.6.16 ([#15](https://github.com/syntro-opensource/ansible.silverstripe/issues/15))
+- robertdebock/galaxy-action from 1.1.0 to 1.1.1 ([#16](https://github.com/syntro-opensource/ansible.silverstripe/issues/16))
+
+
 <a name="1.0.4"></a>
 ## [1.0.4] - 2021-04-07
 ### 🐞 Fixed
@@ -62,7 +72,8 @@
 - Merge pull request [#4](https://github.com/syntro-opensource/ansible.silverstripe/issues/4) from syntro-opensource/release/1.0.0
 
 
-[Unreleased]: https://github.com/syntro-opensource/ansible.silverstripe/compare/1.0.4...HEAD
+[Unreleased]: https://github.com/syntro-opensource/ansible.silverstripe/compare/1.1.0...HEAD
+[1.1.0]: https://github.com/syntro-opensource/ansible.silverstripe/compare/1.0.4...1.1.0
 [1.0.4]: https://github.com/syntro-opensource/ansible.silverstripe/compare/1.0.3...1.0.4
 [1.0.3]: https://github.com/syntro-opensource/ansible.silverstripe/compare/1.0.2...1.0.3
 [1.0.2]: https://github.com/syntro-opensource/ansible.silverstripe/compare/1.0.1...1.0.2
