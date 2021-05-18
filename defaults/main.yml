@@ -25,6 +25,9 @@
   # Additional keys to be written to the .env file
   silverstripe_add_ss_keys: {}
 
+  # Specify a custom .htaccess template
+  silverstripe_htaccess_template: htaccess.public.j2
+
   # The name of the resource directory as specified in the composer.json file.
   # If you change the name of this directory, make sure to remove the old link
   # manually to avoid broken paths

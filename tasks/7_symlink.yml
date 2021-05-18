@@ -40,7 +40,7 @@
 
   - name: 'symlink : template out public .htaccess'
     template:
-      src: htaccess.public.j2
+      src: "{{ silverstripe_htaccess_template }}"
       dest: '{{ ss_releases_dir_path }}/.tmp/.htaccess'
       mode: 0644
 
