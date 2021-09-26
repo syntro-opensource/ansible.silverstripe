@@ -37,6 +37,6 @@ jobs:
         with:
           path: "${{ github.repository }}"
       - name: molecule
-        uses: robertdebock/molecule-action@2.6.16
+        uses: robertdebock/molecule-action@2.6.17
         with:
           image: ubuntu
