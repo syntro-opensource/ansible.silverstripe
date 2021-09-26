@@ -10,6 +10,23 @@ on:
       - tasks/**
       - templates/**
       - vars/**
+      - .github/workflows/molecule.yml
+    branches:
+      - develop
+      - master
+  pull_request:
+    paths:
+      - defaults/**
+      - handlers/**
+      - meta/**
+      - molecule/**
+      - tasks/**
+      - templates/**
+      - vars/**
+      - .github/workflows/molecule.yml
+    branches:
+      - develop
+      - master
 
 jobs:
   molecule:
