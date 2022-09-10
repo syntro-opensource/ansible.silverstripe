@@ -18,8 +18,13 @@ def test_hosts_file(host):
     assert f.exists
 
 def test_webroot(host):
-    assert os.path.exists('/var/www/html/')
-    assert os.path.exists('/var/www/html/index.php')
-    assert os.path.exists('/var/www/html/_graphql')
-    assert os.path.exists('/var/www/html/assets')
-    assert os.path.exists('/var/www/html/.htaccess')
+    f = host.file('/var/www/html/')
+    assert f.exists
+    f = host.file('/var/www/html/index.php')
+    assert f.exists
+    f = host.file('/var/www/html/_graphql')
+    assert f.exists
+    f = host.file('/var/www/html/assets')
+    assert f.exists
+    f = host.file('/var/www/html/.htaccess')
+    assert f.exists
