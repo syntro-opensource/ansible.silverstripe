@@ -33,6 +33,11 @@
   # manually to avoid broken paths
   silverstripe_resource_dir_name: _resources
 
+  # The name of the generated graphql directory.
+  # If you change the name of this directory, make sure to remove the old link
+  # manually to avoid broken paths
+  silverstripe_public_graphql_dir_name: _graphql
+
   # Additional shared directories which should persist between releases
   # You can control how the direcory or file is exposed by specifying
   # the options in the asset example below. These values default to false.

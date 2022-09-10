@@ -22,7 +22,7 @@
       path: '{{ ss_releases_dir_path }}/.tmp'
       state: directory
 
-  - name: 'symlink : create links'
+  - name: 'symlink : create ressources link'
     file:
       path: '{{ ss_releases_dir_path }}/.tmp/{{ item.name }}'
       src: '{{ item.src }}'
@@ -31,6 +31,23 @@
     with_items:
       - name: '{{ silverstripe_resource_dir_name }}'
         src: '{{ ss_current_public_dir_path }}/{{ silverstripe_resource_dir_name }}'
+
+  - name: 'symlink : check if public graphql directory exists'
+    stat:
+      path: '{{ ss_current_public_dir_path }}/{{ silverstripe_public_graphql_dir_name }}'
+    register: public_graphql_dir
+
+
+  - name: 'symlink : create graphql link'
+    file:
+      path: '{{ ss_releases_dir_path }}/.tmp/{{ item.name }}'
+      src: '{{ item.src }}'
+      mode: 0755
+      state: link
+    when: public_graphql_dir.stat.exists and public_graphql_dir.stat.isdir
+    with_items:
+      - name: '{{ silverstripe_public_graphql_dir_name }}'
+        src: '{{ ss_current_public_dir_path }}/{{ silverstripe_public_graphql_dir_name }}'
 
   - name: 'symlink : template out public index.php'
     template:
