@@ -21,7 +21,7 @@
     php_version: '7.4'
     php_default_version_debian: "7.4"
     php_opcache_enable_cli: "1"
-    php_enable_webserver: true
+    php_enable_webserver: false
   roles:
     - role: php-versions
     - role: php
