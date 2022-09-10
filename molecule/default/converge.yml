@@ -8,7 +8,8 @@
     silverstripe_ss_database_name: silverstripe
     silverstripe_ss_database_username: root
     silverstripe_ss_database_password: root
-    silverstripe_provisioning_cmds: []
+    silverstripe_provisioning_cmds:
+      - '{{ ss_current_release_dir_path }}/vendor/bin/sake /dev/graphql/build "flush=1"'
     silverstripe_composer_ignore_platform_reqs: true
   pre_tasks:
     - name: make root directory
