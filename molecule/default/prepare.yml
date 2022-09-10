@@ -28,6 +28,7 @@
     - role: git
   pre_tasks:
     - name: install packages
-      package:
+      apt:
         name: dirmngr
         state: present
+        update_cache: true
