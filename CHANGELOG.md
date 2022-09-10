@@ -2,6 +2,23 @@
 ## [Unreleased]
 
 
+<a name="1.2.0"></a>
+## [1.2.0] - 2022-09-10
+### 🍰 Added
+- package.json to automate release
+- correctly transfer a graphql static dir ([#36](https://github.com/syntro-opensource/ansible.silverstripe/issues/36))
+
+### 🐞 Fixed
+- dependabot adds `Bump:` as prefix for updates
+
+### 🔧 Changed
+- tests run on pull
+
+### 🧬 Dependencies
+- robertdebock/galaxy-action from 1.1.1 to 1.2.1 ([#34](https://github.com/syntro-opensource/ansible.silverstripe/issues/34))
+- robertdebock/molecule-action from 2.6.16 to 2.6.17 ([#18](https://github.com/syntro-opensource/ansible.silverstripe/issues/18))
+
+
 <a name="1.1.0"></a>
 ## [1.1.0] - 2021-05-18
 ### 🍰 Added
@@ -72,7 +89,8 @@
 - Merge pull request [#4](https://github.com/syntro-opensource/ansible.silverstripe/issues/4) from syntro-opensource/release/1.0.0
 
 
-[Unreleased]: https://github.com/syntro-opensource/ansible.silverstripe/compare/1.1.0...HEAD
+[Unreleased]: https://github.com/syntro-opensource/ansible.silverstripe/compare/1.2.0...HEAD
+[1.2.0]: https://github.com/syntro-opensource/ansible.silverstripe/compare/1.1.0...1.2.0
 [1.1.0]: https://github.com/syntro-opensource/ansible.silverstripe/compare/1.0.4...1.1.0
 [1.0.4]: https://github.com/syntro-opensource/ansible.silverstripe/compare/1.0.3...1.0.4
 [1.0.3]: https://github.com/syntro-opensource/ansible.silverstripe/compare/1.0.2...1.0.3
