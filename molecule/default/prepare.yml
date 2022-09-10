@@ -18,7 +18,7 @@
       - php-xml
       - php-dom
       - php-curl
-    php_default_version_debian: "7.2"
+    php_default_version_debian: "7.4"
     php_opcache_enable_cli: "1"
   roles:
     - role: php

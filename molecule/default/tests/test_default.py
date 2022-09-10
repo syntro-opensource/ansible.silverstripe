@@ -13,3 +13,6 @@ def test_hosts_file(host):
     assert f.exists
     assert f.user == 'root'
     assert f.group == 'root'
+
+    f = host.file('/var/www/html/index.php')
+    assert f.exists

@@ -3,7 +3,7 @@
   hosts: all
   vars:
     silverstripe_working_dir: /var/www
-    silverstripe_project_repository: https://github.com/silverstripe/recipe-core.git
+    silverstripe_project_repository: https://github.com/syntro-opensource/silverstripe-ssto
     silverstripe_project_version: master
     silverstripe_ss_database_name: silverstripe
     silverstripe_ss_database_username: root
