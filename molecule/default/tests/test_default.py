@@ -18,7 +18,6 @@ def test_hosts_file(host):
     assert f.exists
 
 def test_webroot(host):
-    assert os.path.exists('/var/www/html')
     assert os.path.exists('/var/www/html/')
     assert os.path.exists('/var/www/html/index.php')
     assert os.path.exists('/var/www/html/_graphql')
