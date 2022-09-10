@@ -26,3 +26,8 @@
     - role: php
     - role: composer
     - role: git
+  pre_tasks:
+    - name: install packages
+      package:
+        name: dirmngr
+        state: present
