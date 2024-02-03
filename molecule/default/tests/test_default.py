@@ -28,3 +28,14 @@ def test_webroot(host):
     assert f.exists
     f = host.file('/var/www/html/.htaccess')
     assert f.exists
+
+
+def test_env(host):
+  f = host.file('/var/www/releases/')
+  assert f.exists
+  r = f.glob('*')
+  assert len(r) > 0
+  r = r[0]
+  f = host.file('/var/www/releases/' + r + '/.env')
+  assert f.exists
+
