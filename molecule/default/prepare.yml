@@ -18,8 +18,8 @@
       - php-xml
       # - php-dom
       - php-curl
-    php_version: '7.4'
-    php_default_version_debian: "7.4"
+    php_version: '8.1'
+    php_default_version_debian: "8.1"
     php_opcache_enable_cli: "1"
     php_enable_webserver: false
   roles:

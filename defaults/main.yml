@@ -22,6 +22,8 @@
   silverstripe_ss_environment_type: 'dev'
   # Uses the given file to check wether a flush should occur
   silverstripe_ss_flush_on_deploy: '{{ ss_current_dir_path }}/index.php'
+  # Specify the location of the logfile
+  silverstripe_ss_error_log: '../../../logs/ss_log.log'
   # Additional keys to be written to the .env file
   silverstripe_add_ss_keys: {}
 

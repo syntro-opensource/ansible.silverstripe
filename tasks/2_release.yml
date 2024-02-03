@@ -97,7 +97,7 @@
 
   - name: 'release : set relative logfile path'
     set_fact:
-      ss_current_log_file: '../../../logs/ss_log.log'
+      ss_current_log_file: "{{ silverstripe_ss_error_log | default('../../../logs/ss_log.log') }}"
     when:
       - ss_current_dir_path_stat.stat.isdir is defined
       - ss_current_dir_path_stat.stat.isdir
