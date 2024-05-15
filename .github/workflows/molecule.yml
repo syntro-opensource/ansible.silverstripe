@@ -42,16 +42,19 @@ jobs:
         with:
           python-version: '3.x'
 
-      - name: Install test dependencies.
-        run: pip3 install ansible molecule molecule-plugins[docker] docker
+      - name: run molecule
+        uses: gofrolist/molecule-action@v2
 
-      - name: Run Molecule tests.
-        run: molecule test
-        env:
-          PY_COLORS: '1'
-          ANSIBLE_FORCE_COLOR: '1'
-          MOLECULE_DISTRO: ubuntu2204
-          # - name: molecule
+      # - name: Install test dependencies.
+      #   run: pip3 install ansible molecule molecule-plugins[docker] docker
+
+    # - name: Run Molecule tests.
+    #   run: molecule test
+    #   env:
+    #     PY_COLORS: '1'
+    #     ANSIBLE_FORCE_COLOR: '1'
+    #     MOLECULE_DISTRO: ubuntu2204
+    #     # - name: molecule
 
       #   uses: robertdebock/molecule-action@4.0.7
       #   with:
