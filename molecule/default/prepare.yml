@@ -18,6 +18,7 @@
       - php-xml
       # - php-dom
       - php-curl
+      - pytest
     php_version: '8.1'
     php_default_version_debian: "8.1"
     php_opcache_enable_cli: "1"
