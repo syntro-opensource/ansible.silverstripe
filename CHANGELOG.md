@@ -2,6 +2,15 @@
 ## [Unreleased]
 
 
+<a name="1.2.1"></a>
+## [1.2.1] - 2024-05-15
+### 🍰 Added
+- configurable logfile ([#43](https://github.com/syntro-opensource/ansible.silverstripe/issues/43))
+
+### 🧬 Dependencies
+- Bump actions/checkout from 3.0.2 to 4.1.5 ([#49](https://github.com/syntro-opensource/ansible.silverstripe/issues/49))
+
+
 <a name="1.2.0"></a>
 ## [1.2.0] - 2022-09-10
 ### 🍰 Added
@@ -89,7 +98,8 @@
 - Merge pull request [#4](https://github.com/syntro-opensource/ansible.silverstripe/issues/4) from syntro-opensource/release/1.0.0
 
 
-[Unreleased]: https://github.com/syntro-opensource/ansible.silverstripe/compare/1.2.0...HEAD
+[Unreleased]: https://github.com/syntro-opensource/ansible.silverstripe/compare/1.2.1...HEAD
+[1.2.1]: https://github.com/syntro-opensource/ansible.silverstripe/compare/1.2.0...1.2.1
 [1.2.0]: https://github.com/syntro-opensource/ansible.silverstripe/compare/1.1.0...1.2.0
 [1.1.0]: https://github.com/syntro-opensource/ansible.silverstripe/compare/1.0.4...1.1.0
 [1.0.4]: https://github.com/syntro-opensource/ansible.silverstripe/compare/1.0.3...1.0.4
