@@ -10,6 +10,7 @@
   # Specify the base url of this page. Needed for cli commands.
   silverstripe_ss_base_url: http://localhost
   # Specify the database server
+  silverstripe_ss_database_class: 'MySQLPDODatabase'
   silverstripe_ss_database_server: localhost
   silverstripe_ss_database_name: ''
   silverstripe_ss_database_username: ''
