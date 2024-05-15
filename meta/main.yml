@@ -1,6 +1,7 @@
 ---
 galaxy_info:
   role_name: silverstripe
+  namespace: syntro_gmbh
   author: Matthias Leutenegger
   description: Role to deploy a Silverstripe installation.
   company: Syntro GmbH
