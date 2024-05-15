@@ -26,8 +26,6 @@ provisioner:
 #     name: ansible-lint
 verifier:
   name: testinfra
-  lint:
-    name: flake8
   options:
     s: true
 scenario:
