@@ -24,10 +24,12 @@ provisioner:
     converge: converge.yml
 #   lint:
 #     name: ansible-lint
-# verifier:
-#   name: testinfra
-#   lint:
-#     name: flake8
+verifier:
+  name: testinfra
+  lint:
+    name: flake8
+  options:
+    s: true
 scenario:
   name: default
   test_sequence:
