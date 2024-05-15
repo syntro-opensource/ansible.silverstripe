@@ -52,6 +52,7 @@ jobs:
           ANSIBLE_FORCE_COLOR: '1'
           MOLECULE_DISTRO: ubuntu2204
           # - name: molecule
+
       #   uses: robertdebock/molecule-action@4.0.7
       #   with:
       #     image: ubuntu
