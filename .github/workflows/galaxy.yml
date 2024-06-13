@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: checkout
-        uses: actions/checkout@v4.1.5
+        uses: actions/checkout@v4.1.7
       - name: galaxy
         uses: robertdebock/galaxy-action@1.2.1
         with:
