@@ -2,6 +2,12 @@
 ## [Unreleased]
 
 
+<a name="2.0.1"></a>
+## [2.0.1] - 2026-05-07
+### 🔧 Changed
+- reverted back to old sake style
+
+
 <a name="2.0.0"></a>
 ## [2.0.0] - 2026-05-07
 ### 🔧 Changed
@@ -104,7 +110,8 @@
 - Merge pull request [#4](https://github.com/syntro-opensource/ansible.silverstripe/issues/4) from syntro-opensource/release/1.0.0
 
 
-[Unreleased]: https://github.com/syntro-opensource/ansible.silverstripe/compare/2.0.0...HEAD
+[Unreleased]: https://github.com/syntro-opensource/ansible.silverstripe/compare/2.0.1...HEAD
+[2.0.1]: https://github.com/syntro-opensource/ansible.silverstripe/compare/2.0.0...2.0.1
 [2.0.0]: https://github.com/syntro-opensource/ansible.silverstripe/compare/1.2.1...2.0.0
 [1.2.1]: https://github.com/syntro-opensource/ansible.silverstripe/compare/1.2.0...1.2.1
 [1.2.0]: https://github.com/syntro-opensource/ansible.silverstripe/compare/1.1.0...1.2.0
