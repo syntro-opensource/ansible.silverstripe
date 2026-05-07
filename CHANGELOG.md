@@ -2,6 +2,12 @@
 ## [Unreleased]
 
 
+<a name="2.0.0"></a>
+## [2.0.0] - 2026-05-07
+### 🔧 Changed
+- update scripts to use new (v6) sake version
+
+
 <a name="1.2.1"></a>
 ## [1.2.1] - 2024-05-15
 ### 🍰 Added
@@ -98,7 +104,8 @@
 - Merge pull request [#4](https://github.com/syntro-opensource/ansible.silverstripe/issues/4) from syntro-opensource/release/1.0.0
 
 
-[Unreleased]: https://github.com/syntro-opensource/ansible.silverstripe/compare/1.2.1...HEAD
+[Unreleased]: https://github.com/syntro-opensource/ansible.silverstripe/compare/2.0.0...HEAD
+[2.0.0]: https://github.com/syntro-opensource/ansible.silverstripe/compare/1.2.1...2.0.0
 [1.2.1]: https://github.com/syntro-opensource/ansible.silverstripe/compare/1.2.0...1.2.1
 [1.2.0]: https://github.com/syntro-opensource/ansible.silverstripe/compare/1.1.0...1.2.0
 [1.1.0]: https://github.com/syntro-opensource/ansible.silverstripe/compare/1.0.4...1.1.0

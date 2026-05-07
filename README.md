@@ -51,6 +51,7 @@ ansible-galaxy install syntro_gmbh.silverstripe
 
 * Composer
 * Git
+* SilverStripe >= 6
 
 ## Dependencies
 
