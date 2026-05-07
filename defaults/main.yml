@@ -58,7 +58,7 @@
   # Use this array to run the dev/build command from the cli or any backup
   # scripts you might need.
   silverstripe_provisioning_cmds:
-    - '{{ ss_current_release_dir_path }}/vendor/bin/sake db:build -f'
+    - 'sh {{ ss_current_release_dir_path }}/vendor/bin/sake /dev/build "flush=1"'
 
   # Number of releases to retain. If you run this role for a commit which is
   # currently retained, this role will not attempt to reinstall composer
